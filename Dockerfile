@@ -1,12 +1,16 @@
 # Pull base image.
 FROM python:3.6
 
-# Install Nginx
 RUN \
   apt-get -y update && \
-  pip install cement
+  apt-get -y install vim
 
-WORKDIR /var/drone
+# Install pip packages we need
+RUN \
+  pip install uwsgi && \
+  pip install falcon
 
-CMD [ "python", "helloworld.py" ]
+WORKDIR /var/worker
 
+# Run nginx and uwsgi when container starts
+ENTRYPOINT uwsgi --ini /var/worker/uwsgi.ini
