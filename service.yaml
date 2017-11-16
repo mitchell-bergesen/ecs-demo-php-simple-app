@@ -79,3 +79,4 @@ Resources:
             - /bin/sh -c "while true; do /bin/date > /var/www/my-vol/date; sleep 1; done"
       Volumes:
         - Name: my-vol
+        
